@@ -1218,6 +1218,10 @@ function resize() {
 resize();
 window.addEventListener('resize', resize, { passive: true });
 
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', resize, { passive: true });
+}
+
 let mouse = { x: 0, y: 0 };
 window.addEventListener('mousemove', e => {
   const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
@@ -1346,7 +1350,8 @@ function drawPortrait(pulse) {
 function render() {
   //requestAnimationFrame(render);
   //t++;
-  const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
+  // const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
+  const pulse = 0.5;
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle = '#050200'; ctx.fillRect(0,0,W,H);
