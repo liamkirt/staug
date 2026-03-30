@@ -1212,9 +1212,11 @@ function resize() {
   scale = Math.max(W / REF_W, H / REF_H);
   offX  = (W - REF_W * scale) / 2;
   offY  = (H - REF_H * scale) / 2;
+
+  render(); // redraw static arcs after canvas gets cleared
 }
 resize();
-window.addEventListener('resize', resize);
+window.addEventListener('resize', resize, { passive: true });
 
 let mouse = { x: 0, y: 0 };
 window.addEventListener('mousemove', e => {
