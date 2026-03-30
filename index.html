@@ -195,9 +195,33 @@
 
   @keyframes fadeUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
-  @media(max-width:640px){
-    .hero-headline, .hero-tag { max-width: 100%; }
+
+  /* ── MOBILE HERO ── */
+  @media(max-width:768px){
+    .hero { min-height: 100svh; max-height: none; }
+
+    /* Text sits in the bottom ~45% — canvas portrait fills the top */
+    .hero-inner {
+      justify-content: flex-end;
+      padding-bottom: 88px;
+      padding-left: 1.4rem;
+      padding-right: 1.4rem;
+    }
+
+    /* Remove 55% cap — portrait is above not beside */
+    .hero-tag, .hero-headline { max-width: 100%; }
+    .hero-headline { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+    .hero-sub { max-width: 100%; font-size: 0.88rem; }
+    .btn-join, .btn-learn { padding: 0.75rem 1.4rem; font-size: 0.75rem; }
+
+    /* Stats bar — drop expensive backdrop-filter on mobile */
+    .stats-bar { backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .stat { padding: 0.65rem 0.4rem; }
+    .stat-num { font-size: clamp(1rem, 4.5vw, 1.4rem); }
     .stat-label { display: none; }
+
+    /* Nav — swap blur for solid bg */
+    nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(8,4,0,0.96); }
   }
 
   /* ═══════════════════════════════════════════
@@ -1117,7 +1141,7 @@
         </div>
         <div class="contact-detail-body">
           <div class="contact-detail-label">Email</div>
-          <div class="contact-detail-value"><a href="mailto:staugustine@ttparliament.org">staugustine@ttparliament.org</a></div>
+          <div class="contact-detail-value"><a href="/cdn-cgi/l/email-protection#7407001501130107001d1a11340000041506181d1519111a005a1b0613"><span class="__cf_email__" data-cfemail="2754534652405254534e49426753535746554b4e464a42495309485540">[email&#160;protected]</span></a></div>
         </div>
       </div>
     </div>
@@ -1185,7 +1209,7 @@
         <li><a href="#">43 Pasea Main Road</a></li>
         <li><a href="#">Pasea Village, Tunapuna</a></li>
         <li><a href="tel:7395287">739-5287</a></li>
-        <li><a href="mailto:staugustine@ttparliament.org">staugustine@ttparliament.org</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#3447405541534147405d5a51744040445546585d5559515a401a5b4653"><span class="__cf_email__" data-cfemail="710205100416040205181f143105050110031d18101c141f055f1e0316">[email&#160;protected]</span></a></li>
       </ul>
     </div>
   </div>
@@ -1198,57 +1222,77 @@
 <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
 <script>
 // ─────────────────────────────────────────
-// HERO CANVAS (preserved from original)
+// HERO CANVAS — mobile-optimised
 // ─────────────────────────────────────────
 const canvas = document.getElementById('mainCanvas');
 const ctx    = canvas.getContext('2d');
 const REF_W = 1920, REF_H = 900;
 let W, H, scale, offX, offY;
 
+// Detect mobile once; re-check on resize
+let isMobile = window.innerWidth < 768;
+
 function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  isMobile = window.innerWidth < 768;
+  // Mobile: cap DPR at 1 to halve pixel count; desktop allow up to 2
+  const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
   W = canvas.width  = canvas.offsetWidth  * dpr | 0;
   H = canvas.height = canvas.offsetHeight * dpr | 0;
   scale = Math.max(W / REF_W, H / REF_H);
   offX  = (W - REF_W * scale) / 2;
   offY  = (H - REF_H * scale) / 2;
-
-  render(); // redraw static arcs after canvas gets cleared
 }
 resize();
-window.addEventListener('resize', resize, { passive: true });
+window.addEventListener('resize', resize);
 
-if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', resize, { passive: true });
-}
-
+// Mouse parallax — desktop only, throttled
 let mouse = { x: 0, y: 0 };
-window.addEventListener('mousemove', e => {
-  const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
-  const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-  mouse.x += (nx * 16 - mouse.x) * 0.022;
-  mouse.y += (ny * 10 - mouse.y) * 0.022;
-});
+if (!isMobile) {
+  let lastMove = 0;
+  window.addEventListener('mousemove', e => {
+    const now = Date.now();
+    if (now - lastMove < 32) return; // ~30fps cap on input
+    lastMove = now;
+    const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+    mouse.x += (nx * 16 - mouse.x) * 0.022;
+    mouse.y += (ny * 10 - mouse.y) * 0.022;
+  });
+}
 
 let t = 0;
 
-const ARCS = [
+// ── ARC DEFINITIONS ──────────────────────────────────────────────────────────
+// Desktop: all 7 arcs. Mobile: trim to 4 brightest, fewer particles (pd)
+const ARCS_DESKTOP = [
   { x0:38,   y0:500, cx1:500,  cy1:890, cx2:1400, cy2:890, x1:1900, y1:180,
-    lw:3.0, alpha:0.95, gw:52, ga:0.30, phase:0.0, pd:130 },
+    lw:3.0, alpha:0.95, gw:52, ga:0.30, phase:0.0,  pd:130 },
   { x0:140,  y0:440, cx1:530,  cy1:810, cx2:1360, cy2:810, x1:1900, y1:100,
-    lw:1.7, alpha:0.75, gw:30, ga:0.20, phase:0.55, pd:78 },
+    lw:1.7, alpha:0.75, gw:30, ga:0.20, phase:0.55, pd:78  },
   { x0:340,  y0:580, cx1:600,  cy1:840, cx2:1320, cy2:820, x1:1900, y1:260,
-    lw:1.2, alpha:0.60, gw:20, ga:0.15, phase:0.95, pd:55 },
+    lw:1.2, alpha:0.60, gw:20, ga:0.15, phase:0.95, pd:55  },
   { x0:500,  y0:650, cx1:700,  cy1:860, cx2:1340, cy2:840, x1:1900, y1:330,
-    lw:0.9, alpha:0.48, gw:14, ga:0.11, phase:1.25, pd:40 },
+    lw:0.9, alpha:0.48, gw:14, ga:0.11, phase:1.25, pd:40  },
   { x0:700,  y0:630, cx1:900,  cy1:800, cx2:1380, cy2:700, x1:1905, y1:220,
-    lw:1.1, alpha:0.58, gw:18, ga:0.13, phase:1.05, pd:52 },
+    lw:1.1, alpha:0.58, gw:18, ga:0.13, phase:1.05, pd:52  },
   { x0:940,  y0:700, cx1:1100, cy1:820, cx2:1420, cy2:740, x1:1905, y1:305,
-    lw:0.65,alpha:0.42, gw:10, ga:0.09, phase:1.55, pd:30 },
+    lw:0.65,alpha:0.42, gw:10, ga:0.09, phase:1.55, pd:30  },
   { x0:1180, y0:748, cx1:1300, cy1:850, cx2:1460, cy2:790, x1:1885, y1:392,
-    lw:0.42,alpha:0.28, gw:6,  ga:0.06, phase:2.05, pd:18 },
+    lw:0.42,alpha:0.28, gw:6,  ga:0.06, phase:2.05, pd:18  },
 ];
+const ARCS_MOBILE = [
+  { x0:38,   y0:500, cx1:500,  cy1:890, cx2:1400, cy2:890, x1:1900, y1:180,
+    lw:3.0, alpha:0.95, gw:52, ga:0.28, phase:0.0,  pd:35  },
+  { x0:140,  y0:440, cx1:530,  cy1:810, cx2:1360, cy2:810, x1:1900, y1:100,
+    lw:1.7, alpha:0.75, gw:30, ga:0.18, phase:0.55, pd:22  },
+  { x0:700,  y0:630, cx1:900,  cy1:800, cx2:1380, cy2:700, x1:1905, y1:220,
+    lw:1.1, alpha:0.58, gw:18, ga:0.12, phase:1.05, pd:16  },
+  { x0:940,  y0:700, cx1:1100, cy1:820, cx2:1420, cy2:740, x1:1905, y1:305,
+    lw:0.65,alpha:0.42, gw:10, ga:0.08, phase:1.55, pd:10  },
+];
+const ARCS = isMobile ? ARCS_MOBILE : ARCS_DESKTOP;
 
+// ── PARTICLES ─────────────────────────────────────────────────────────────────
 class Particle {
   constructor(arc) { this.arc = arc; this.reset(); }
   reset() {
@@ -1259,6 +1303,8 @@ class Particle {
     this.maxLife  = 100 + Math.random() * 220;
     this.offset   = (Math.random() - 0.5) * 26;
     this.bright   = 0.45 + Math.random() * 0.55;
+    // Pre-pick hue so we don't call Math.random() inside render loop
+    this.hue      = 16 + Math.random() * 26;
   }
   step() {
     this.progress += this.speed; this.life++;
@@ -1278,13 +1324,17 @@ class Particle {
 const particles = [];
 ARCS.forEach(a => { for(let i=0;i<a.pd;i++) particles.push(new Particle(a)); });
 
-const DUST = Array.from({length:200}, ()=>({
+// ── DUST — 60 on mobile, 200 on desktop ───────────────────────────────────────
+const DUST_COUNT = isMobile ? 60 : 200;
+const DUST = Array.from({length: DUST_COUNT}, ()=>({
   x:Math.random()*REF_W, y:Math.random()*REF_H,
   r:0.4+Math.random()*1.3,
   vx:(Math.random()-0.5)*0.055, vy:-0.018-Math.random()*0.045,
   opacity:0.03+Math.random()*0.20, hue:18+Math.random()*26,
 }));
 
+// ── DRAW ARC ──────────────────────────────────────────────────────────────────
+// Mobile: skip ctx.filter blur (most expensive op) — use wider alpha glow instead
 function drawArc(arc, pulse) {
   const fl = 0.90+0.10*Math.sin(t*0.007+arc.phase);
   const mx=mouse.x, my=mouse.y;
@@ -1292,25 +1342,45 @@ function drawArc(arc, pulse) {
         cx1=arc.cx1+mx*0.22,cy1=arc.cy1+my*0.18,
         cx2=arc.cx2+mx*0.10,cy2=arc.cy2+my*0.08,
         x1=arc.x1, y1=arc.y1;
-  ctx.save();
-  ctx.globalAlpha=arc.ga*fl*(0.88+pulse*0.12);
-  const gG=ctx.createLinearGradient(x0,y0,x1,y1);
-  gG.addColorStop(0,'#5a1200'); gG.addColorStop(0.4,'#e07a00');
-  gG.addColorStop(0.7,'#ffbf38'); gG.addColorStop(1,'#e04e00');
-  ctx.strokeStyle=gG; ctx.lineWidth=arc.gw+pulse*9;
-  ctx.filter=`blur(${arc.gw*0.38}px)`;
-  ctx.beginPath(); ctx.moveTo(x0,y0); ctx.bezierCurveTo(cx1,cy1,cx2,cy2,x1,y1); ctx.stroke();
-  ctx.filter='none'; ctx.restore();
+
+  if (!isMobile) {
+    // Desktop: full glow with ctx.filter blur
+    ctx.save();
+    ctx.globalAlpha=arc.ga*fl*(0.88+pulse*0.12);
+    const gG=ctx.createLinearGradient(x0,y0,x1,y1);
+    gG.addColorStop(0,'#5a1200'); gG.addColorStop(0.4,'#e07a00');
+    gG.addColorStop(0.7,'#ffbf38'); gG.addColorStop(1,'#e04e00');
+    ctx.strokeStyle=gG; ctx.lineWidth=arc.gw+pulse*9;
+    ctx.filter=`blur(${arc.gw*0.38}px)`;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.bezierCurveTo(cx1,cy1,cx2,cy2,x1,y1); ctx.stroke();
+    ctx.filter='none'; ctx.restore();
+  } else {
+    // Mobile: fake glow with a thick semi-transparent stroke (no filter)
+    ctx.save();
+    ctx.globalAlpha=arc.ga*fl*0.55;
+    const gG=ctx.createLinearGradient(x0,y0,x1,y1);
+    gG.addColorStop(0,'#5a1200'); gG.addColorStop(0.4,'#e07a00');
+    gG.addColorStop(0.7,'#ffbf38'); gG.addColorStop(1,'#e04e00');
+    ctx.strokeStyle=gG;
+    ctx.lineWidth=(arc.gw+pulse*9)*1.8; // wider to compensate for no blur
+    ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.bezierCurveTo(cx1,cy1,cx2,cy2,x1,y1); ctx.stroke();
+    ctx.restore();
+  }
+
+  // Core line — same on both, but no shadowBlur on mobile
   ctx.save();
   ctx.globalAlpha=arc.alpha*fl;
   const gC=ctx.createLinearGradient(x0,y0,x1,y1);
   gC.addColorStop(0,'#903200'); gC.addColorStop(0.3,'#e88e00');
   gC.addColorStop(0.55,'#ffd870'); gC.addColorStop(0.8,'#e8a018'); gC.addColorStop(1,'#e05c00');
-  ctx.strokeStyle=gC; ctx.lineWidth=arc.lw; ctx.shadowBlur=18; ctx.shadowColor='#e88800';
+  ctx.strokeStyle=gC; ctx.lineWidth=arc.lw;
+  if (!isMobile) { ctx.shadowBlur=18; ctx.shadowColor='#e88800'; }
   ctx.beginPath(); ctx.moveTo(x0,y0); ctx.bezierCurveTo(cx1,cy1,cx2,cy2,x1,y1); ctx.stroke();
   ctx.restore();
 }
 
+// ── HOTSPOTS ──────────────────────────────────────────────────────────────────
 function drawHotspots(pulse) {
   const hx=960+mouse.x*0.7, hy=820+mouse.y*0.4, r=160+pulse*40;
   const g=ctx.createRadialGradient(hx,hy,0,hx,hy,r);
@@ -1319,80 +1389,129 @@ function drawHotspots(pulse) {
   g.addColorStop(0.45,'rgba(195,75,8,0.22)');
   g.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle=g; ctx.beginPath(); ctx.arc(hx,hy,r,0,Math.PI*2); ctx.fill();
-  const rx=1740+mouse.x*0.25, ry=170+mouse.y*0.25, r2=108+pulse*26;
-  const g2=ctx.createRadialGradient(rx,ry,0,rx,ry,r2);
-  g2.addColorStop(0,`rgba(255,200,100,${0.44+pulse*0.16})`);
-  g2.addColorStop(0.28,'rgba(235,115,18,0.28)');
-  g2.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(rx,ry,r2,0,Math.PI*2); ctx.fill();
+  if (!isMobile) {
+    // Second hotspot — skip on mobile to save two radialGradient+arc calls
+    const rx=1740+mouse.x*0.25, ry=170+mouse.y*0.25, r2=108+pulse*26;
+    const g2=ctx.createRadialGradient(rx,ry,0,rx,ry,r2);
+    g2.addColorStop(0,`rgba(255,200,100,${0.44+pulse*0.16})`);
+    g2.addColorStop(0.28,'rgba(235,115,18,0.28)');
+    g2.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(rx,ry,r2,0,Math.PI*2); ctx.fill();
+  }
 }
 
+// ── PORTRAIT ──────────────────────────────────────────────────────────────────
 const portrait = new Image();
 portrait.src = 'MP Ameen hd fixed.png';
 let portraitLoaded = false;
 portrait.onload  = () => { portraitLoaded = true; };
 portrait.onerror = () => { console.warn('Portrait not loaded — check path'); };
 
-const PORT = { x: REF_W * 0.50, y: 0, w: REF_W * 0.52, h: REF_H };
-
-function drawPortrait(pulse) {
+function drawPortrait() {
   if (!portraitLoaded) return;
   const imgRatio = portrait.naturalWidth / portrait.naturalHeight;
-  const boxRatio = PORT.w / PORT.h;
   let dw, dh, dx, dy;
-  if (imgRatio < boxRatio) { dh = PORT.h; dw = dh * imgRatio; }
-  else { dw = PORT.w; dh = dw / imgRatio; }
-  dx = PORT.x + (PORT.w - dw) * 0.72;
-  dy = PORT.y + PORT.h - dh;
+
+  if (isMobile) {
+    // ── MOBILE: portrait centered at TOP, anchored below nav ──
+    // Use 68% of REF_W max width, keep aspect, don't exceed 58% of REF_H
+    const maxW = REF_W * 0.68;
+    const maxH = REF_H * 0.58;
+    dw = maxW; dh = dw / imgRatio;
+    if (dh > maxH) { dh = maxH; dw = dh * imgRatio; }
+    dx = (REF_W - dw) / 2;               // centered horizontally
+    const navInRef = 72 / scale;          // nav height in ref-space pixels
+    dy = navInRef + 4;                    // snug below nav
+  } else {
+    // ── DESKTOP: right-side, bottom-anchored ──
+    const portX = REF_W * 0.50;
+    const portW = REF_W * 0.52;
+    dw = portW; dh = dw / imgRatio;
+    if (dh > REF_H) { dh = REF_H; dw = dh * imgRatio; }
+    dx = portX + (portW - dw) * 0.72;
+    dy = REF_H - dh;
+  }
+
   ctx.drawImage(portrait, dx, dy, dw, dh);
 }
 
+// ── RENDER LOOP ───────────────────────────────────────────────────────────────
+// Mobile: ~30fps by rendering every other rAF tick
+let frameCount = 0;
+
 function render() {
-  //requestAnimationFrame(render);
-  //t++;
-  // const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
-  const pulse = 0.5;
+  requestAnimationFrame(render);
+  frameCount++;
+
+  // Mobile: skip odd frames (2,4,6…) — frame 1 always draws
+  if (isMobile && frameCount % 2 === 0) return;
+
+  t++;
+  const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
+
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle = '#050200'; ctx.fillRect(0,0,W,H);
   ctx.setTransform(scale,0,0,scale,offX,offY);
+
+  // Nebula background — single on mobile
   const nb=ctx.createRadialGradient(960+mouse.x*0.35,820+mouse.y*0.25,0,960,800,880);
   nb.addColorStop(0,`rgba(65,18,0,${0.45+pulse*0.10})`);
   nb.addColorStop(0.4,'rgba(25,6,0,0.30)'); nb.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle=nb; ctx.fillRect(0,0,REF_W,REF_H);
-  const nb2=ctx.createRadialGradient(1680,180,0,1680,180,480);
-  nb2.addColorStop(0,`rgba(50,12,0,${0.36+pulse*0.08})`);
-  nb2.addColorStop(0.5,'rgba(16,4,0,0.16)'); nb2.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle=nb2; ctx.fillRect(0,0,REF_W,REF_H);
-  //DUST.forEach(d=>{
-    //d.x=(d.x+d.vx+REF_W)%REF_W; d.y=(d.y+d.vy+REF_H)%REF_H;
-    //ctx.globalAlpha=d.opacity*(0.4+pulse*0.6);
-    //ctx.fillStyle=`hsl(${d.hue},88%,57%)`;
-    //ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
-  //});
+
+  if (!isMobile) {
+    const nb2=ctx.createRadialGradient(1680,180,0,1680,180,480);
+    nb2.addColorStop(0,`rgba(50,12,0,${0.36+pulse*0.08})`);
+    nb2.addColorStop(0.5,'rgba(16,4,0,0.16)'); nb2.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=nb2; ctx.fillRect(0,0,REF_W,REF_H);
+  }
+
+  // Dust
+  DUST.forEach(d=>{
+    d.x=(d.x+d.vx+REF_W)%REF_W; d.y=(d.y+d.vy+REF_H)%REF_H;
+    ctx.globalAlpha=d.opacity*(0.4+pulse*0.6);
+    ctx.fillStyle=`hsl(${d.hue},88%,57%)`;
+    ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
+  });
   ctx.globalAlpha=1;
+
+  // Arcs
   ARCS.forEach(a => drawArc(a, pulse));
-  // particles.forEach(p => {
-  //   p.step(); const pos=p.pos();
-  //   const life=Math.min(p.life/40,1)*Math.min((p.maxLife-p.life)/28,1);
-  //   ctx.globalAlpha=life*p.bright*(0.48+pulse*0.38);
-  //   const hue=16+Math.random()*26;
-  //   ctx.fillStyle=`hsl(${hue},88%,${54+p.bright*24}%)`;
-  //   ctx.shadowBlur=p.size*5; ctx.shadowColor=`hsl(${hue},100%,65%)`;
-  //   ctx.beginPath(); ctx.arc(pos.x,pos.y,p.size,0,Math.PI*2); ctx.fill();
-  // });
+
+  // Particles — no shadowBlur on mobile (single biggest perf win)
+  particles.forEach(p => {
+    p.step(); const pos=p.pos();
+    const life=Math.min(p.life/40,1)*Math.min((p.maxLife-p.life)/28,1);
+    ctx.globalAlpha=life*p.bright*(0.48+pulse*0.38);
+    ctx.fillStyle=`hsl(${p.hue},88%,${54+p.bright*24}%)`;
+    if (!isMobile) { ctx.shadowBlur=p.size*5; ctx.shadowColor=`hsl(${p.hue},100%,65%)`; }
+    ctx.beginPath(); ctx.arc(pos.x,pos.y,p.size,0,Math.PI*2); ctx.fill();
+  });
   ctx.shadowBlur=0; ctx.globalAlpha=1;
+
   drawHotspots(pulse);
-  drawPortrait(pulse);
+  drawPortrait();
+
+  // Directional fades
   const tf=ctx.createLinearGradient(0,0,0,REF_H*0.42);
   tf.addColorStop(0,'rgba(5,2,0,0.60)'); tf.addColorStop(1,'rgba(5,2,0,0)');
   ctx.fillStyle=tf; ctx.fillRect(0,0,REF_W,REF_H);
-  const lf=ctx.createLinearGradient(0,0,REF_W*0.72,0);
-  lf.addColorStop(0,    'rgba(5,2,0,0.82)');
-  lf.addColorStop(0.38, 'rgba(5,2,0,0.55)');
-  lf.addColorStop(0.62, 'rgba(5,2,0,0.18)');
-  lf.addColorStop(1,    'rgba(5,2,0,0)');
-  ctx.fillStyle=lf; ctx.fillRect(0,0,REF_W,REF_H);
+
+  if (isMobile) {
+    // Mobile: fade lower half so text below portrait is legible
+    const mf=ctx.createLinearGradient(0,REF_H*0.45,0,REF_H*0.72);
+    mf.addColorStop(0,'rgba(5,2,0,0)');
+    mf.addColorStop(1,'rgba(5,2,0,0.82)');
+    ctx.fillStyle=mf; ctx.fillRect(0,0,REF_W,REF_H);
+  } else {
+    // Desktop: left fade for text readability
+    const lf=ctx.createLinearGradient(0,0,REF_W*0.72,0);
+    lf.addColorStop(0,'rgba(5,2,0,0.82)'); lf.addColorStop(0.38,'rgba(5,2,0,0.55)');
+    lf.addColorStop(0.62,'rgba(5,2,0,0.18)'); lf.addColorStop(1,'rgba(5,2,0,0)');
+    ctx.fillStyle=lf; ctx.fillRect(0,0,REF_W,REF_H);
+  }
+
   const bf=ctx.createLinearGradient(0,REF_H*0.78,0,REF_H);
   bf.addColorStop(0,'rgba(5,2,0,0)'); bf.addColorStop(1,'rgba(5,2,0,0.95)');
   ctx.fillStyle=bf; ctx.fillRect(0,0,REF_W,REF_H);
@@ -1431,16 +1550,40 @@ bars.forEach(b => barObserver.observe(b));
 
 // ─────────────────────────────────────────
 // FORM SUBMIT (no-op demo)
+// 
 // ─────────────────────────────────────────
-document.querySelector('.btn-submit').addEventListener('click', function() {
-  this.textContent = 'Message Sent ✓';
-  this.style.background = '#2a7a2a';
-  setTimeout(() => {
-    this.textContent = 'Send Message';
-    this.style.background = '';
-  }, 3000);
-});
-</script>
+// FORM SUBMIT (no-op demo)
+// ─────────────────────────────────────────
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = contactForm.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#2a6e2a';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+  });
+}
 
+// ─────────────────────────────────────────
+// HAMBURGER MENU
+// ─────────────────────────────────────────
+const hamburger = document.querySelector('.hamburger');
+const navLinks  = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '72px';
+    navLinks.style.left = '0'; navLinks.style.right = '0';
+    navLinks.style.background = 'rgba(8,4,0,0.98)';
+    navLinks.style.padding = '1rem 2rem 1.5rem';
+    navLinks.style.borderBottom = '1px solid rgba(232,135,10,0.18)';
+  });
+}
+</script>
 </body>
 </html>
