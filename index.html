@@ -1342,7 +1342,7 @@ function drawPortrait(pulse) {
 }
 
 function render() {
-  requestAnimationFrame(render);
+  // requestAnimationFrame(render);
   t++;
   const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
   ctx.setTransform(1,0,0,1,0,0);
@@ -1390,7 +1390,7 @@ function render() {
   bf.addColorStop(0,'rgba(5,2,0,0)'); bf.addColorStop(1,'rgba(5,2,0,0.95)');
   ctx.fillStyle=bf; ctx.fillRect(0,0,REF_W,REF_H);
 }
-render();
+// render();
 
 // ─────────────────────────────────────────
 // SCROLL REVEAL
