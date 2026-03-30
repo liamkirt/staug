@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Honourable Khadijah Ameen — Member of Parliament, St. Augustine</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold:        #e8870a;
+    --gold-bright: #ffb84d;
+    --gold-deep:   #b85c00;
+    --bg:          #080400;
+    --bg2:         #0d0700;
+    --bg3:         #110900;
+    --text:        rgba(255,240,210,0.82);
+    --text-dim:    rgba(255,220,160,0.45);
+    --border:      rgba(232,135,10,0.18);
+    --border-soft: rgba(232,135,10,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+  html, body {
+    width: 100%; min-height: 100%;
+    background: var(--bg);
+    font-family: 'Barlow', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 72px;
+    background: rgba(8,4,0,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .nav-logo-mark {
+    width: 42px; height: 42px; background: var(--gold);
+    clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%);
+    position: relative; flex-shrink: 0;
+    transition: background 0.25s;
+  }
+  .nav-logo-mark::after {
+    content: ''; position: absolute; inset: 4px; background: var(--bg);
+    clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%);
+  }
+  .nav-logo:hover .nav-logo-mark { background: var(--gold-bright); }
+  .nav-logo-text {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: 0.78rem; letter-spacing: 0.12em; color: #fff;
+    text-transform: uppercase; line-height: 1.3;
+  }
+  .nav-logo-text span { color: var(--gold); display: block; font-size: 0.62rem; letter-spacing: 0.18em; font-weight: 400; }
+  .nav-links { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2.2rem); list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.08em; font-weight: 500;
+    color: rgba(255,255,255,0.78); text-decoration: none; text-transform: uppercase;
+    transition: color 0.25s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold-bright); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-donate {
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; background: var(--gold); border: none;
+    padding: 0.6rem 1.5rem; cursor: pointer; transition: background 0.25s, transform 0.2s;
+  }
+  .nav-donate:hover { background: var(--gold-bright); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); transition: all 0.3s; }
+  @media(max-width:768px){ .nav-links{display:none;} .hamburger{display:flex;} }
+
+  /* ═══════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════ */
+  .hero {
+    position: relative; width: 100%;
+    height: 100svh; min-height: 560px; max-height: 960px;
+    overflow: hidden; background: #050200;
+  }
+  #mainCanvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.14; z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px; mix-blend-mode: overlay;
+    animation: grain 0.14s steps(1) infinite;
+  }
+  @keyframes grain {
+    0%{background-position:0 0} 25%{background-position:-55px 38px}
+    50%{background-position:28px -18px} 75%{background-position:-36px -55px}
+  }
+  .hero-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 clamp(1.5rem, 6vw, 5.5rem);
+    padding-top: 72px;
+    padding-bottom: 80px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .hero-inner button { pointer-events: all; }
+  .hero-tag {
+    font-family: 'Barlow', sans-serif; font-weight: 500;
+    font-size: clamp(0.62rem, 1.1vw, 0.80rem);
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+    opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    margin-bottom: clamp(0.7rem, 1.6vh, 1.1rem);
+    display: flex; align-items: center; gap: 0.8rem;
+    max-width: 55%;
+  }
+  .hero-tag::before { content:''; display:block; width:28px; height:2px; background:var(--gold); flex-shrink:0; }
+  .hero-headline {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: clamp(1.9rem, 4.2vw, 4rem);
+    line-height: 1.08; color: #fff;
+    opacity: 0; animation: fadeUp 1s ease 0.55s forwards;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.7);
+    margin-bottom: clamp(0.6rem, 1.4vh, 1rem);
+    max-width: 55%;
+  }
+  .hero-headline em { font-style: normal; color: var(--gold-bright); display: block; }
+  .hero-sub {
+    font-family: 'Barlow', sans-serif; font-weight: 300;
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    color: rgba(255,240,210,0.70); line-height: 1.68;
+    max-width: 42ch;
+    opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+    margin-bottom: clamp(1.4rem, 3vh, 2.4rem);
+  }
+  .hero-cta {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    opacity: 0; animation: fadeUp 1s ease 1.05s forwards;
+  }
+  .btn-join {
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #fff; background: var(--gold); border: none;
+    padding: 0.85rem 2rem; cursor: pointer;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 0 28px rgba(232,135,10,0.4);
+  }
+  .btn-join:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 0 44px rgba(232,135,10,0.65); }
+  .btn-learn {
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.32);
+    padding: 0.85rem 2rem; cursor: pointer;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .btn-learn:hover { border-color: var(--gold); color: var(--gold-bright); }
+  .stats-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
+    display: flex; align-items: stretch;
+    background: rgba(6,3,0,0.88); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    opacity: 0; animation: fadeIn 1s ease 1.5s forwards;
+  }
+  .stat {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: clamp(0.9rem, 2.5vh, 1.4rem) 1rem;
+    border-right: 1px solid rgba(232,135,10,0.14); text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem); color: var(--gold-bright); line-height: 1;
+  }
+  .stat-num span { font-size: 0.7em; color: var(--gold); }
+  .stat-label {
+    font-family: 'Barlow', sans-serif; font-weight: 400;
+    font-size: clamp(0.58rem, 0.95vw, 0.70rem); letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-dim); margin-top: 0.3rem;
+  }
+
+  @keyframes fadeUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+  @media(max-width:640px){
+    .hero-headline, .hero-tag { max-width: 100%; }
+    .stat-label { display: none; }
+  }
+
+  /* ═══════════════════════════════════════════
+     SHARED BODY STYLES
+  ═══════════════════════════════════════════ */
+  .section-tag {
+    font-family: 'Barlow', sans-serif; font-weight: 500;
+    font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold); display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .section-tag::before { content:''; display:block; width:24px; height:1.5px; background:var(--gold); flex-shrink:0; }
+
+  .section-title {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+    color: #fff; line-height: 1.12;
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: normal; color: var(--gold-bright); }
+
+  .gold-rule {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    margin-bottom: 2rem;
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.22s; }
+  .reveal-delay-3 { transition-delay: 0.34s; }
+  .reveal-delay-4 { transition-delay: 0.46s; }
+  .reveal-delay-5 { transition-delay: 0.58s; }
+
+  /* subtle grain overlay for body sections */
+  .body-grain::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.04; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  /* ═══════════════════════════════════════════
+     ABOUT SECTION
+  ═══════════════════════════════════════════ */
+  #about {
+    position: relative; overflow: hidden;
+    background: var(--bg2);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 5.5rem);
+    border-top: 1px solid var(--border-soft);
+  }
+  /* ambient arc echo */
+  #about::before {
+    content: ''; position: absolute; right: -200px; top: -100px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,92,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .about-text p {
+    font-family: 'Barlow', sans-serif; font-weight: 300;
+    font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+    line-height: 1.82; color: var(--text);
+    margin-bottom: 1.4rem;
+  }
+  .about-text p strong {
+    color: var(--gold-bright); font-weight: 600;
+  }
+
+  .about-pull {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+    font-style: italic; font-weight: 300;
+    color: rgba(255,220,160,0.65);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.4rem;
+    margin: 2rem 0;
+    line-height: 1.5;
+  }
+
+  .about-btn {
+    display: inline-block;
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); background: transparent;
+    border: 1.5px solid var(--gold);
+    padding: 0.8rem 2rem; cursor: pointer; text-decoration: none;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+    margin-top: 0.5rem;
+  }
+  .about-btn:hover { background: var(--gold); color: #000; transform: translateY(-2px); }
+
+  /* portrait card */
+  .about-portrait {
+    position: relative;
+  }
+  .about-portrait-frame {
+    position: relative;
+    display: inline-block; width: 100%;
+  }
+  .about-portrait-frame::before {
+    content: ''; position: absolute;
+    top: -12px; left: -12px;
+    right: 12px; bottom: 12px;
+    border: 1px solid var(--border);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .about-portrait-frame::after {
+    content: ''; position: absolute;
+    top: 12px; left: 12px;
+    right: -12px; bottom: -12px;
+    background: linear-gradient(135deg, rgba(232,135,10,0.12), transparent);
+    z-index: 0;
+  }
+  .about-portrait-img {
+    width: 100%; display: block;
+    position: relative; z-index: 1;
+    filter: sepia(0.08) brightness(0.95);
+  }
+  .about-portrait-caption {
+    margin-top: 1.4rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .about-fact {
+    display: flex; align-items: baseline; gap: 0.8rem;
+    font-size: 0.82rem; color: var(--text-dim); letter-spacing: 0.04em;
+  }
+  .about-fact strong { color: var(--gold-bright); font-family: 'Cinzel', serif; font-size: 0.75rem; }
+
+  @media(max-width:840px){
+    .about-grid { grid-template-columns: 1fr; }
+    .about-portrait { order: -1; max-width: 360px; margin: 0 auto; }
+  }
+
+  /* ═══════════════════════════════════════════
+     TIMELINE SECTION
+  ═══════════════════════════════════════════ */
+  #timeline {
+    position: relative; overflow: hidden;
+    background: var(--bg);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 5.5rem);
+    border-top: 1px solid var(--border-soft);
+  }
+  #timeline::before {
+    content: ''; position: absolute;
+    left: -150px; bottom: -100px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(140,60,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .timeline-header {
+    max-width: 1200px; margin: 0 auto 4rem;
+  }
+
+  .timeline-track {
+    max-width: 1000px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  /* central spine */
+  .timeline-track::before {
+    content: ''; position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+    transform: translateX(-50%);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    align-items: start;
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+
+  .tl-left { text-align: right; padding-right: 2rem; padding-top: 0.2rem; }
+  .tl-right { padding-left: 2rem; padding-top: 0.2rem; }
+  .tl-empty { /* spacer side */ }
+
+  /* alternate layout */
+  .tl-item.right .tl-left { order: 3; text-align: left; padding-left: 2rem; padding-right: 0; }
+  .tl-item.right .tl-center { order: 2; }
+  .tl-item.right .tl-right { order: 1; text-align: right; padding-right: 2rem; padding-left: 0; }
+
+  .tl-center {
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: 0.15rem;
+  }
+  .tl-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--gold); background: var(--bg);
+    position: relative; flex-shrink: 0;
+    transition: background 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .tl-dot::after {
+    content: ''; position: absolute;
+    inset: 3px; border-radius: 50%;
+    background: var(--gold);
+  }
+  .tl-item:hover .tl-dot {
+    background: var(--gold); box-shadow: 0 0 20px rgba(232,135,10,0.6);
+  }
+
+  .tl-year {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--gold-bright); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .tl-role {
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.04em;
+    color: #fff; text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .tl-body {
+    font-family: 'Barlow', sans-serif; font-weight: 300;
+    font-size: 0.88rem; line-height: 1.7;
+    color: var(--text);
+  }
+  .tl-badge {
+    display: inline-block;
+    font-family: 'Barlow', sans-serif; font-size: 0.62rem;
+    font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--border); padding: 0.2rem 0.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  @media(max-width:680px){
+    .timeline-track::before { left: 18px; }
+    .tl-item, .tl-item.right {
+      grid-template-columns: 36px 1fr;
+    }
+    .tl-item .tl-left, .tl-item.right .tl-left { display: none; }
+    .tl-item .tl-center, .tl-item.right .tl-center { order: 1; grid-column: 1; padding-top: 0.15rem; }
+    .tl-item .tl-right, .tl-item.right .tl-right {
+      order: 2; grid-column: 2;
+      text-align: left; padding-left: 1rem; padding-right: 0;
+    }
+    .tl-dot { width: 14px; height: 14px; }
+  }
+
+  /* ═══════════════════════════════════════════
+     PARLIAMENTARY SERVICE
+  ═══════════════════════════════════════════ */
+  #parliament {
+    position: relative; overflow: hidden;
+    background: var(--bg3);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 5.5rem);
+    border-top: 1px solid var(--border-soft);
+  }
+  #parliament::after {
+    content: ''; position: absolute;
+    right: -100px; top: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,100,0,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .parliament-inner {
+    max-width: 1200px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .parliament-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.5px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    margin-bottom: 3rem;
+  }
+
+  .parl-card {
+    background: rgba(8,4,0,0.92); padding: 2rem 1.8rem;
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .parl-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .parl-card:hover { background: rgba(14,7,0,0.98); }
+  .parl-card:hover::before { transform: scaleX(1); }
+
+  .parl-num {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: 2.8rem; color: rgba(232,135,10,0.12);
+    line-height: 1; margin-bottom: 0.8rem;
+    transition: color 0.3s;
+  }
+  .parl-card:hover .parl-num { color: rgba(232,135,10,0.22); }
+  .parl-title {
+    font-family: 'Cinzel', serif; font-weight: 600;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold-bright); margin-bottom: 0.4rem;
+  }
+  .parl-dates {
+    font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim);
+    margin-bottom: 1rem; text-transform: uppercase;
+  }
+  .parl-role-tag {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; background: var(--gold-deep); padding: 0.2rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .parl-body {
+    font-size: 0.88rem; font-weight: 300; line-height: 1.7; color: var(--text);
+  }
+
+  /* Committees */
+  .committees-block {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .committee-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid var(--border-soft);
+    background: rgba(232,135,10,0.03);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .committee-item:hover { border-color: var(--border); background: rgba(232,135,10,0.06); }
+  .committee-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0; margin-top: 0.45rem;
+  }
+  .committee-name {
+    font-size: 0.86rem; line-height: 1.5; color: var(--text);
+  }
+
+  /* Maiden speech */
+  .maiden-block {
+    margin-top: 3rem;
+    border: 1px solid var(--border);
+    padding: 2rem 2.2rem;
+    display: flex; flex-wrap: wrap; gap: 1.5rem;
+    align-items: center; justify-content: space-between;
+    background: rgba(232,135,10,0.04);
+    position: relative; overflow: hidden;
+  }
+  .maiden-block::before {
+    content: '"'; position: absolute; right: 1.5rem; top: -0.5rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 8rem;
+    color: rgba(232,135,10,0.06); line-height: 1; pointer-events: none;
+  }
+  .maiden-text-wrap {}
+  .maiden-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .maiden-title {
+    font-family: 'Cinzel', serif; font-weight: 600;
+    font-size: 1rem; color: #fff; margin-bottom: 0.3rem;
+  }
+  .maiden-date { font-size: 0.82rem; color: var(--text-dim); }
+  .btn-maiden {
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); background: transparent;
+    border: 1px solid var(--gold); padding: 0.75rem 1.6rem;
+    cursor: pointer; text-decoration: none; white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-maiden:hover { background: var(--gold); color: #000; }
+
+  /* ═══════════════════════════════════════════
+     PRIORITIES / WORK TOGETHER
+  ═══════════════════════════════════════════ */
+  #priorities {
+    position: relative; overflow: hidden;
+    background: var(--bg2);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 5.5rem);
+    border-top: 1px solid var(--border-soft);
+  }
+  .priorities-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .priorities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .priority-card {
+    border: 1px solid var(--border-soft);
+    background: rgba(232,135,10,0.02);
+    padding: 2rem 1.8rem;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .priority-card:hover {
+    border-color: rgba(232,135,10,0.38);
+    background: rgba(232,135,10,0.06);
+    transform: translateY(-3px);
+  }
+  .priority-icon {
+    width: 40px; height: 40px; margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .priority-icon svg { width: 100%; height: 100%; fill: none; stroke: var(--gold); stroke-width: 1.5; }
+  .priority-name {
+    font-family: 'Cinzel', serif; font-weight: 600;
+    font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #fff; margin-bottom: 0.8rem;
+  }
+  .priority-desc {
+    font-size: 0.88rem; font-weight: 300; line-height: 1.72; color: var(--text);
+  }
+  /* progress bar */
+  .priority-bar {
+    margin-top: 1.4rem;
+    height: 2px; background: rgba(232,135,10,0.14); position: relative; overflow: hidden;
+  }
+  .priority-bar-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    width: 0;
+  }
+  .priority-bar-label {
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 0.4rem;
+  }
+
+  /* ═══════════════════════════════════════════
+     CONTACT SECTION
+  ═══════════════════════════════════════════ */
+  #contact {
+    position: relative; overflow: hidden;
+    background: var(--bg);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 5.5rem);
+    border-top: 1px solid var(--border-soft);
+  }
+  #contact::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(100,40,0,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 70%, rgba(60,20,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+    position: relative; z-index: 1;
+  }
+
+  .contact-info {}
+  .contact-info p {
+    font-weight: 300; font-size: 0.92rem; line-height: 1.8;
+    color: var(--text); margin-bottom: 2.5rem;
+  }
+
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .contact-detail-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-detail-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.5; }
+  .contact-detail-body {}
+  .contact-detail-label {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 0.2rem;
+  }
+  .contact-detail-value {
+    font-size: 0.9rem; color: #fff; line-height: 1.5;
+  }
+  .contact-detail-value a { color: var(--gold-bright); text-decoration: none; transition: color 0.2s; }
+  .contact-detail-value a:hover { color: #fff; }
+
+  /* form */
+  .contact-form {}
+  .contact-form-title {
+    font-family: 'Cinzel', serif; font-weight: 600;
+    font-size: 1.1rem; letter-spacing: 0.06em; color: #fff;
+    margin-bottom: 1.6rem;
+  }
+  .form-row { margin-bottom: 1rem; }
+  .form-row label {
+    display: block; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 0.4rem;
+  }
+  .form-row input, .form-row textarea, .form-row select {
+    width: 100%; background: rgba(232,135,10,0.04);
+    border: 1px solid var(--border-soft); color: #fff;
+    font-family: 'Barlow', sans-serif; font-size: 0.9rem; font-weight: 300;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.25s, background 0.25s;
+    outline: none; appearance: none;
+  }
+  .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+    border-color: var(--gold); background: rgba(232,135,10,0.07);
+  }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(255,220,160,0.25); }
+  .form-row textarea { resize: vertical; min-height: 110px; }
+  .form-row select option { background: #0d0700; color: #fff; }
+  .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .btn-submit {
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #fff; background: var(--gold); border: none;
+    padding: 0.9rem 2.4rem; cursor: pointer; margin-top: 0.5rem;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 0 24px rgba(232,135,10,0.3);
+  }
+  .btn-submit:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 0 36px rgba(232,135,10,0.55); }
+
+  @media(max-width:860px){
+    .contact-inner { grid-template-columns: 1fr; }
+    .form-two { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════ */
+  footer {
+    background: #050200;
+    border-top: 1px solid var(--border-soft);
+    padding: 3rem clamp(1.5rem, 6vw, 5.5rem) 1.5rem;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .footer-brand {}
+  .footer-brand-name {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: 1rem; letter-spacing: 0.1em; color: #fff; margin-bottom: 0.3rem;
+  }
+  .footer-brand-sub { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.1rem; }
+  .footer-brand-bio { font-size: 0.85rem; font-weight: 300; line-height: 1.7; color: var(--text); }
+  .footer-col-title {
+    font-family: 'Barlow', sans-serif; font-size: 0.7rem;
+    font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.55rem; }
+  .footer-links a {
+    font-size: 0.85rem; font-weight: 300; color: var(--text);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold-bright); }
+  .footer-bottom {
+    max-width: 1200px; margin: 1.2rem auto 0;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .footer-copy { font-size: 0.75rem; color: var(--text-dim); }
+  .footer-party {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .footer-party strong { color: var(--gold); }
+
+  @media(max-width:680px){
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark"></div>
+    <div class="nav-logo-text">
+      Khadijah Ameen
+      <span>For the People</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#parliament">Parliament</a></li>
+    <li><a href="#priorities">Priorities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-donate">Donate</button>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <canvas id="mainCanvas"></canvas>
+  <div class="grain"></div>
+  <div class="hero-inner">
+    <p class="hero-tag">The Honourable Khadijah Ameen</p>
+    <h1 class="hero-headline">
+      Building a<br>
+      <em>Better Tomorrow</em><br>
+      for Our Community
+    </h1>
+    <p class="hero-sub">
+      Dedicated leadership, real results. Serving the people of
+      St. Augustine and Trinidad &amp; Tobago with integrity, vision,
+      and an unwavering commitment to progress.
+    </p>
+    <div class="hero-cta">
+      <button class="btn-join" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Involved</button>
+      <button class="btn-learn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">10<span>+</span></div><div class="stat-label">Years Serving</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Parliaments</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Committees</div></div>
+    <div class="stat"><div class="stat-num">100<span>%</span></div><div class="stat-label">Committed to You</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="section-tag reveal">Member of Parliament · St. Augustine</p>
+      <h2 class="section-title reveal reveal-delay-1">A Life of <em>Public Service</em></h2>
+      <div class="gold-rule reveal reveal-delay-1"></div>
+
+      <p class="reveal reveal-delay-2">
+        The Honourable <strong>Khadijah Ameen</strong> is the Member of Parliament for St. Augustine and
+        Minister of Rural Development and Local Government. First entering Parliament in 2015, she has
+        served as an Opposition Senator, Opposition Member of Parliament, and now as a Cabinet Minister.
+      </p>
+      <p class="reveal reveal-delay-2">
+        Her journey in public life began at a young age. Nominated as a Local Government Councillor
+        at just 21 and elected at 22, she made history in <strong>2010 as the youngest Chairman</strong>
+        of the Tunapuna Piarco Regional Corporation — a milestone that reflects her early commitment
+        to community and governance.
+      </p>
+
+      <blockquote class="about-pull reveal reveal-delay-3">
+        "Public service is not a privilege to be held — it is a responsibility to be lived."
+      </blockquote>
+
+      <p class="reveal reveal-delay-3">
+        She holds an <strong>MBA in Leadership</strong> from Anglia Ruskin University and is currently
+        pursuing an <strong>LLB with the University of London</strong>, combining academic rigour
+        with hands-on legislative experience.
+      </p>
+
+      <a href="#parliament" class="about-btn reveal reveal-delay-4">View Parliamentary Record</a>
+    </div>
+
+    <div class="about-portrait reveal reveal-delay-2">
+      <div class="about-portrait-frame">
+        <img src="MP Ameen hd fixed.png" alt="The Honourable Khadijah Ameen" class="about-portrait-img" onerror="this.style.display='none'">
+      </div>
+      <div class="about-portrait-caption">
+        <div class="about-fact"><strong>Constituency</strong> St. Augustine, Trinidad &amp; Tobago</div>
+        <div class="about-fact"><strong>Party</strong> United National Congress (UNC)</div>
+        <div class="about-fact"><strong>Minister</strong> Rural Development &amp; Local Government</div>
+        <div class="about-fact"><strong>Education</strong> MBA · LLB (in progress)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ TIMELINE ═══════════════════ -->
+<section id="timeline">
+  <div class="timeline-header">
+    <p class="section-tag reveal">Public Service Career</p>
+    <h2 class="section-title reveal reveal-delay-1">Parliamentary <em>Timeline</em></h2>
+    <div class="gold-rule reveal reveal-delay-1"></div>
+  </div>
+
+  <div class="timeline-track">
+
+    <!-- 2010 -->
+    <div class="tl-item reveal">
+      <div class="tl-left">
+        <div class="tl-badge">Local Government</div>
+        <div class="tl-year">2010</div>
+        <div class="tl-role">Chairman</div>
+        <div class="tl-body">Became the youngest Chairman of the Tunapuna Piarco Regional Corporation — a landmark achievement in local democratic leadership.</div>
+      </div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-right"></div>
+    </div>
+
+    <!-- 2015 -->
+    <div class="tl-item right reveal reveal-delay-1">
+      <div class="tl-left"></div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-right">
+        <div class="tl-badge">11th Parliament</div>
+        <div class="tl-year">2015</div>
+        <div class="tl-role">Opposition Senator</div>
+        <div class="tl-body">Entered the Senate on 23 September 2015, delivering her maiden contribution on the Appropriation (Financial Year 2016) Bill — the beginning of her national parliamentary journey.</div>
+      </div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="tl-item reveal reveal-delay-2">
+      <div class="tl-left">
+        <div class="tl-badge">12th Parliament</div>
+        <div class="tl-year">2020</div>
+        <div class="tl-role">Elected MP, St. Augustine</div>
+        <div class="tl-body">Won the seat for St. Augustine on 28 August 2020, transitioning from Senate to the House of Representatives as Opposition Member of Parliament.</div>
+      </div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-right"></div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="tl-item right reveal reveal-delay-3">
+      <div class="tl-left"></div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-right">
+        <div class="tl-badge">13th Parliament · Present</div>
+        <div class="tl-year">2025</div>
+        <div class="tl-role">Minister &amp; Re-elected MP</div>
+        <div class="tl-body">Re-elected to represent St. Augustine in the 13th Republican Parliament from 3 May 2025 and appointed <strong style="color:var(--gold-bright)">Minister of Rural Development and Local Government</strong> — her highest office to date.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ PARLIAMENTARY SERVICE ═══════════════════ -->
+<section id="parliament">
+  <div class="parliament-inner">
+    <p class="section-tag reveal">Parliamentary Record</p>
+    <h2 class="section-title reveal reveal-delay-1">Service in <em>Parliament</em></h2>
+    <div class="gold-rule reveal reveal-delay-1"></div>
+
+    <!-- Parliament cards -->
+    <div class="parliament-grid">
+
+      <div class="parl-card reveal">
+        <div class="parl-num">XIII</div>
+        <div class="parl-title">13th Republican Parliament</div>
+        <div class="parl-dates">3 May 2025 — Present</div>
+        <div class="parl-role-tag">Minister · House of Representatives</div>
+        <div class="parl-body">
+          Serving as Member of Parliament for St. Augustine and Minister of Rural Development and Local Government. Currently a member of four active parliamentary committees.
+        </div>
+      </div>
+
+      <div class="parl-card reveal reveal-delay-1">
+        <div class="parl-num">XII</div>
+        <div class="parl-title">12th Republican Parliament</div>
+        <div class="parl-dates">28 Aug 2020 — 18 Mar 2025</div>
+        <div class="parl-role-tag">Opposition Member · House of Representatives</div>
+        <div class="parl-body">
+          Elected as Member of Parliament for St. Augustine, serving as a vigorous Opposition voice on matters of community welfare, governance, and accountability.
+        </div>
+      </div>
+
+      <div class="parl-card reveal reveal-delay-2">
+        <div class="parl-num">XI</div>
+        <div class="parl-title">11th Republican Parliament</div>
+        <div class="parl-dates">23 Sep 2015 — 9 Aug 2020</div>
+        <div class="parl-role-tag">Opposition Senator · Senate</div>
+        <div class="parl-body">
+          Entered Parliament as an Opposition Senator, establishing a strong legislative record across five years of national Senate service prior to being elected to the House.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Committees -->
+    <p class="section-tag reveal">Current Committees</p>
+    <h3 class="reveal reveal-delay-1" style="font-family:'Cinzel',serif;font-weight:600;font-size:1.1rem;color:#fff;margin-bottom:1.4rem;letter-spacing:0.04em;">Committee Memberships — 13th Parliament</h3>
+    <div class="committees-block">
+      <div class="committee-item reveal">
+        <div class="committee-dot"></div>
+        <div class="committee-name">Standing Finance Committee</div>
+      </div>
+      <div class="committee-item reveal reveal-delay-1">
+        <div class="committee-dot"></div>
+        <div class="committee-name">Committee on Social Services and Public Administration</div>
+      </div>
+      <div class="committee-item reveal reveal-delay-2">
+        <div class="committee-dot"></div>
+        <div class="committee-name">Public Accounts (Enterprises) Committee</div>
+      </div>
+      <div class="committee-item reveal reveal-delay-3">
+        <div class="committee-dot"></div>
+        <div class="committee-name">Parliamentary Broadcasting Committee</div>
+      </div>
+    </div>
+
+    <!-- Maiden speech -->
+    <div class="maiden-block reveal">
+      <div class="maiden-text-wrap">
+        <div class="maiden-label">Maiden Contribution</div>
+        <div class="maiden-title">The Appropriation (Financial Year 2016) Bill, 2015</div>
+        <div class="maiden-date">The Senate — Tuesday, 20 October 2015</div>
+      </div>
+      <a href="#" class="btn-maiden">View Maiden Contribution</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ PRIORITIES ═══════════════════ -->
+<section id="priorities">
+  <div class="priorities-inner">
+    <p class="section-tag reveal">Our Work Together</p>
+    <h2 class="section-title reveal reveal-delay-1">Key <em>Priorities</em></h2>
+    <div class="gold-rule reveal reveal-delay-1"></div>
+    <p class="reveal reveal-delay-2" style="font-weight:300;font-size:0.94rem;line-height:1.8;color:var(--text);max-width:56ch;margin-bottom:0;">
+      Progress on the key initiatives being advanced for the constituency of St. Augustine and the Ministry of Rural Development and Local Government.
+    </p>
+
+    <div class="priorities-grid">
+
+      <div class="priority-card reveal">
+        <div class="priority-icon">
+          <svg viewBox="0 0 40 40"><rect x="4" y="20" width="32" height="16" rx="1"/><polyline points="4,20 20,6 36,20"/><rect x="15" y="28" width="10" height="8"/></svg>
+        </div>
+        <div class="priority-name">Infrastructure Development</div>
+        <div class="priority-desc">Road improvements, street lighting upgrades, and community facility enhancements across rural and local communities.</div>
+        <div class="priority-bar"><div class="priority-bar-fill" data-width="75"></div></div>
+        <div class="priority-bar-label">75% Progress</div>
+      </div>
+
+      <div class="priority-card reveal reveal-delay-1">
+        <div class="priority-icon">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="14" r="7"/><path d="M6 36c0-7.7 6.3-14 14-14s14 6.3 14 14"/><line x1="20" y1="28" x2="20" y2="36"/></svg>
+        </div>
+        <div class="priority-name">Youth &amp; Education</div>
+        <div class="priority-desc">Educational programmes, scholarships, mentorship initiatives, and youth development opportunities across the constituency.</div>
+        <div class="priority-bar"><div class="priority-bar-fill" data-width="85"></div></div>
+        <div class="priority-bar-label">85% Progress</div>
+      </div>
+
+      <div class="priority-card reveal reveal-delay-2">
+        <div class="priority-icon">
+          <svg viewBox="0 0 40 40"><path d="M20 4 L36 12 L36 28 L20 36 L4 28 L4 12 Z"/><circle cx="20" cy="20" r="6"/></svg>
+        </div>
+        <div class="priority-name">Social Services</div>
+        <div class="priority-desc">Support systems for families, seniors, and vulnerable community members through targeted social welfare and local government programmes.</div>
+        <div class="priority-bar"><div class="priority-bar-fill" data-width="75"></div></div>
+        <div class="priority-bar-label">75% Progress</div>
+      </div>
+
+      <div class="priority-card reveal reveal-delay-3">
+        <div class="priority-icon">
+          <svg viewBox="0 0 40 40"><path d="M8 32 L8 20 L20 8 L32 20 L32 32"/><polyline points="14,32 14,24 26,24 26,32"/><line x1="6" y1="20" x2="34" y2="20"/></svg>
+        </div>
+        <div class="priority-name">Rural Development</div>
+        <div class="priority-desc">Advancing the mandate of the Ministry of Rural Development and Local Government to uplift rural communities across Trinidad.</div>
+        <div class="priority-bar"><div class="priority-bar-fill" data-width="65"></div></div>
+        <div class="priority-bar-label">65% Progress</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-info">
+      <p class="section-tag reveal">Get in Touch</p>
+      <h2 class="section-title reveal reveal-delay-1">Constituency <em>Office</em></h2>
+      <div class="gold-rule reveal reveal-delay-1"></div>
+      <p class="reveal reveal-delay-2">
+        The constituency office is here to serve every resident of St. Augustine. Whether you need to report a problem, request assistance, or simply speak with a member of staff, we are ready to help.
+      </p>
+
+      <div class="contact-detail reveal reveal-delay-2">
+        <div class="contact-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <div class="contact-detail-body">
+          <div class="contact-detail-label">Constituency Office</div>
+          <div class="contact-detail-value">No. 43 Pasea Main Road<br>Pasea Village, Tunapuna</div>
+        </div>
+      </div>
+
+      <div class="contact-detail reveal reveal-delay-3">
+        <div class="contact-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 5.47 5.47l1.18-1.18a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 20.92 16.92z"/></svg>
+        </div>
+        <div class="contact-detail-body">
+          <div class="contact-detail-label">Telephone</div>
+          <div class="contact-detail-value"><a href="tel:7395287">739-5287</a></div>
+        </div>
+      </div>
+
+      <div class="contact-detail reveal reveal-delay-4">
+        <div class="contact-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-detail-body">
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value"><a href="mailto:staugustine@ttparliament.org">staugustine@ttparliament.org</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="contact-form-title">Send a Message</div>
+      <div class="form-two">
+        <div class="form-row">
+          <label>First Name</label>
+          <input type="text" placeholder="Your first name">
+        </div>
+        <div class="form-row">
+          <label>Last Name</label>
+          <input type="text" placeholder="Your last name">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-row">
+        <label>Subject</label>
+        <select>
+          <option value="" disabled selected>Select a subject</option>
+          <option>Report a Problem</option>
+          <option>Request Assistance</option>
+          <option>Book an Appointment</option>
+          <option>General Enquiry</option>
+          <option>Community Feedback</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Message</label>
+        <textarea placeholder="How can we help you?"></textarea>
+      </div>
+      <button class="btn-submit">Send Message</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-name">The Honourable Khadijah Ameen</div>
+      <div class="footer-brand-sub">Member of Parliament · St. Augustine</div>
+      <div class="footer-brand-bio">
+        Minister of Rural Development and Local Government. Serving St. Augustine with dedication, integrity, and a commitment to progress for all residents of Trinidad &amp; Tobago.
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Khadijah</a></li>
+        <li><a href="#timeline">Career Timeline</a></li>
+        <li><a href="#parliament">Parliamentary Record</a></li>
+        <li><a href="#priorities">Priorities</a></li>
+        <li><a href="#contact">Contact Office</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">43 Pasea Main Road</a></li>
+        <li><a href="#">Pasea Village, Tunapuna</a></li>
+        <li><a href="tel:7395287">739-5287</a></li>
+        <li><a href="mailto:staugustine@ttparliament.org">staugustine@ttparliament.org</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Khadijah Ameen · St. Augustine Constituency. All rights reserved.</div>
+    <div class="footer-party">Political Affiliation: <strong>United National Congress (UNC)</strong></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+// ─────────────────────────────────────────
+// HERO CANVAS (preserved from original)
+// ─────────────────────────────────────────
+const canvas = document.getElementById('mainCanvas');
+const ctx    = canvas.getContext('2d');
+const REF_W = 1920, REF_H = 900;
+let W, H, scale, offX, offY;
+
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = canvas.width  = canvas.offsetWidth  * dpr | 0;
+  H = canvas.height = canvas.offsetHeight * dpr | 0;
+  scale = Math.max(W / REF_W, H / REF_H);
+  offX  = (W - REF_W * scale) / 2;
+  offY  = (H - REF_H * scale) / 2;
+}
+resize();
+window.addEventListener('resize', resize);
+
+let mouse = { x: 0, y: 0 };
+window.addEventListener('mousemove', e => {
+  const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
+  const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+  mouse.x += (nx * 16 - mouse.x) * 0.022;
+  mouse.y += (ny * 10 - mouse.y) * 0.022;
+});
+
+let t = 0;
+
+const ARCS = [
+  { x0:38,   y0:500, cx1:500,  cy1:890, cx2:1400, cy2:890, x1:1900, y1:180,
+    lw:3.0, alpha:0.95, gw:52, ga:0.30, phase:0.0, pd:130 },
+  { x0:140,  y0:440, cx1:530,  cy1:810, cx2:1360, cy2:810, x1:1900, y1:100,
+    lw:1.7, alpha:0.75, gw:30, ga:0.20, phase:0.55, pd:78 },
+  { x0:340,  y0:580, cx1:600,  cy1:840, cx2:1320, cy2:820, x1:1900, y1:260,
+    lw:1.2, alpha:0.60, gw:20, ga:0.15, phase:0.95, pd:55 },
+  { x0:500,  y0:650, cx1:700,  cy1:860, cx2:1340, cy2:840, x1:1900, y1:330,
+    lw:0.9, alpha:0.48, gw:14, ga:0.11, phase:1.25, pd:40 },
+  { x0:700,  y0:630, cx1:900,  cy1:800, cx2:1380, cy2:700, x1:1905, y1:220,
+    lw:1.1, alpha:0.58, gw:18, ga:0.13, phase:1.05, pd:52 },
+  { x0:940,  y0:700, cx1:1100, cy1:820, cx2:1420, cy2:740, x1:1905, y1:305,
+    lw:0.65,alpha:0.42, gw:10, ga:0.09, phase:1.55, pd:30 },
+  { x0:1180, y0:748, cx1:1300, cy1:850, cx2:1460, cy2:790, x1:1885, y1:392,
+    lw:0.42,alpha:0.28, gw:6,  ga:0.06, phase:2.05, pd:18 },
+];
+
+class Particle {
+  constructor(arc) { this.arc = arc; this.reset(); }
+  reset() {
+    this.progress = Math.random();
+    this.speed    = 0.00022 + Math.random() * 0.00060;
+    this.size     = 0.5 + Math.random() * 2.6;
+    this.life     = 0;
+    this.maxLife  = 100 + Math.random() * 220;
+    this.offset   = (Math.random() - 0.5) * 26;
+    this.bright   = 0.45 + Math.random() * 0.55;
+  }
+  step() {
+    this.progress += this.speed; this.life++;
+    if (this.progress > 1 || this.life > this.maxLife) this.reset();
+  }
+  pos() {
+    const a=this.arc, p=this.progress, q=1-p;
+    const x=q*q*q*a.x0+3*q*q*p*a.cx1+3*q*p*p*a.cx2+p*p*p*a.x1;
+    const y=q*q*q*a.y0+3*q*q*p*a.cy1+3*q*p*p*a.cy2+p*p*p*a.y1;
+    const dx=3*(-q*q*a.x0+q*(1-3*p)*a.cx1+p*(2-3*p)*a.cx2+p*p*a.x1);
+    const dy=3*(-q*q*a.y0+q*(1-3*p)*a.cy1+p*(2-3*p)*a.cy2+p*p*a.y1);
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    return { x:x+(-dy/len)*this.offset, y:y+(dx/len)*this.offset };
+  }
+}
+
+const particles = [];
+ARCS.forEach(a => { for(let i=0;i<a.pd;i++) particles.push(new Particle(a)); });
+
+const DUST = Array.from({length:200}, ()=>({
+  x:Math.random()*REF_W, y:Math.random()*REF_H,
+  r:0.4+Math.random()*1.3,
+  vx:(Math.random()-0.5)*0.055, vy:-0.018-Math.random()*0.045,
+  opacity:0.03+Math.random()*0.20, hue:18+Math.random()*26,
+}));
+
+function drawArc(arc, pulse) {
+  const fl = 0.90+0.10*Math.sin(t*0.007+arc.phase);
+  const mx=mouse.x, my=mouse.y;
+  const x0=arc.x0+mx*0.38, y0=arc.y0+my*0.28,
+        cx1=arc.cx1+mx*0.22,cy1=arc.cy1+my*0.18,
+        cx2=arc.cx2+mx*0.10,cy2=arc.cy2+my*0.08,
+        x1=arc.x1, y1=arc.y1;
+  ctx.save();
+  ctx.globalAlpha=arc.ga*fl*(0.88+pulse*0.12);
+  const gG=ctx.createLinearGradient(x0,y0,x1,y1);
+  gG.addColorStop(0,'#5a1200'); gG.addColorStop(0.4,'#e07a00');
+  gG.addColorStop(0.7,'#ffbf38'); gG.addColorStop(1,'#e04e00');
+  ctx.strokeStyle=gG; ctx.lineWidth=arc.gw+pulse*9;
+  ctx.filter=`blur(${arc.gw*0.38}px)`;
+  ctx.beginPath(); ctx.moveTo(x0,y0); ctx.bezierCurveTo(cx1,cy1,cx2,cy2,x1,y1); ctx.stroke();
+  ctx.filter='none'; ctx.restore();
+  ctx.save();
+  ctx.globalAlpha=arc.alpha*fl;
+  const gC=ctx.createLinearGradient(x0,y0,x1,y1);
+  gC.addColorStop(0,'#903200'); gC.addColorStop(0.3,'#e88e00');
+  gC.addColorStop(0.55,'#ffd870'); gC.addColorStop(0.8,'#e8a018'); gC.addColorStop(1,'#e05c00');
+  ctx.strokeStyle=gC; ctx.lineWidth=arc.lw; ctx.shadowBlur=18; ctx.shadowColor='#e88800';
+  ctx.beginPath(); ctx.moveTo(x0,y0); ctx.bezierCurveTo(cx1,cy1,cx2,cy2,x1,y1); ctx.stroke();
+  ctx.restore();
+}
+
+function drawHotspots(pulse) {
+  const hx=960+mouse.x*0.7, hy=820+mouse.y*0.4, r=160+pulse*40;
+  const g=ctx.createRadialGradient(hx,hy,0,hx,hy,r);
+  g.addColorStop(0,`rgba(255,220,150,${0.58+pulse*0.16})`);
+  g.addColorStop(0.15,'rgba(240,155,38,0.50)');
+  g.addColorStop(0.45,'rgba(195,75,8,0.22)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(hx,hy,r,0,Math.PI*2); ctx.fill();
+  const rx=1740+mouse.x*0.25, ry=170+mouse.y*0.25, r2=108+pulse*26;
+  const g2=ctx.createRadialGradient(rx,ry,0,rx,ry,r2);
+  g2.addColorStop(0,`rgba(255,200,100,${0.44+pulse*0.16})`);
+  g2.addColorStop(0.28,'rgba(235,115,18,0.28)');
+  g2.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(rx,ry,r2,0,Math.PI*2); ctx.fill();
+}
+
+const portrait = new Image();
+portrait.src = 'MP Ameen hd fixed.png';
+let portraitLoaded = false;
+portrait.onload  = () => { portraitLoaded = true; };
+portrait.onerror = () => { console.warn('Portrait not loaded — check path'); };
+
+const PORT = { x: REF_W * 0.50, y: 0, w: REF_W * 0.52, h: REF_H };
+
+function drawPortrait(pulse) {
+  if (!portraitLoaded) return;
+  const imgRatio = portrait.naturalWidth / portrait.naturalHeight;
+  const boxRatio = PORT.w / PORT.h;
+  let dw, dh, dx, dy;
+  if (imgRatio < boxRatio) { dh = PORT.h; dw = dh * imgRatio; }
+  else { dw = PORT.w; dh = dw / imgRatio; }
+  dx = PORT.x + (PORT.w - dw) * 0.72;
+  dy = PORT.y + PORT.h - dh;
+  ctx.drawImage(portrait, dx, dy, dw, dh);
+}
+
+function render() {
+  requestAnimationFrame(render);
+  t++;
+  const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#050200'; ctx.fillRect(0,0,W,H);
+  ctx.setTransform(scale,0,0,scale,offX,offY);
+  const nb=ctx.createRadialGradient(960+mouse.x*0.35,820+mouse.y*0.25,0,960,800,880);
+  nb.addColorStop(0,`rgba(65,18,0,${0.45+pulse*0.10})`);
+  nb.addColorStop(0.4,'rgba(25,6,0,0.30)'); nb.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=nb; ctx.fillRect(0,0,REF_W,REF_H);
+  const nb2=ctx.createRadialGradient(1680,180,0,1680,180,480);
+  nb2.addColorStop(0,`rgba(50,12,0,${0.36+pulse*0.08})`);
+  nb2.addColorStop(0.5,'rgba(16,4,0,0.16)'); nb2.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=nb2; ctx.fillRect(0,0,REF_W,REF_H);
+  DUST.forEach(d=>{
+    d.x=(d.x+d.vx+REF_W)%REF_W; d.y=(d.y+d.vy+REF_H)%REF_H;
+    ctx.globalAlpha=d.opacity*(0.4+pulse*0.6);
+    ctx.fillStyle=`hsl(${d.hue},88%,57%)`;
+    ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
+  });
+  ctx.globalAlpha=1;
+  ARCS.forEach(a => drawArc(a, pulse));
+  particles.forEach(p => {
+    p.step(); const pos=p.pos();
+    const life=Math.min(p.life/40,1)*Math.min((p.maxLife-p.life)/28,1);
+    ctx.globalAlpha=life*p.bright*(0.48+pulse*0.38);
+    const hue=16+Math.random()*26;
+    ctx.fillStyle=`hsl(${hue},88%,${54+p.bright*24}%)`;
+    ctx.shadowBlur=p.size*5; ctx.shadowColor=`hsl(${hue},100%,65%)`;
+    ctx.beginPath(); ctx.arc(pos.x,pos.y,p.size,0,Math.PI*2); ctx.fill();
+  });
+  ctx.shadowBlur=0; ctx.globalAlpha=1;
+  drawHotspots(pulse);
+  drawPortrait(pulse);
+  const tf=ctx.createLinearGradient(0,0,0,REF_H*0.42);
+  tf.addColorStop(0,'rgba(5,2,0,0.60)'); tf.addColorStop(1,'rgba(5,2,0,0)');
+  ctx.fillStyle=tf; ctx.fillRect(0,0,REF_W,REF_H);
+  const lf=ctx.createLinearGradient(0,0,REF_W*0.72,0);
+  lf.addColorStop(0,    'rgba(5,2,0,0.82)');
+  lf.addColorStop(0.38, 'rgba(5,2,0,0.55)');
+  lf.addColorStop(0.62, 'rgba(5,2,0,0.18)');
+  lf.addColorStop(1,    'rgba(5,2,0,0)');
+  ctx.fillStyle=lf; ctx.fillRect(0,0,REF_W,REF_H);
+  const bf=ctx.createLinearGradient(0,REF_H*0.78,0,REF_H);
+  bf.addColorStop(0,'rgba(5,2,0,0)'); bf.addColorStop(1,'rgba(5,2,0,0.95)');
+  ctx.fillStyle=bf; ctx.fillRect(0,0,REF_W,REF_H);
+}
+render();
+
+// ─────────────────────────────────────────
+// SCROLL REVEAL
+// ─────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ─────────────────────────────────────────
+// PROGRESS BARS (animate when visible)
+// ─────────────────────────────────────────
+const bars = document.querySelectorAll('.priority-bar-fill');
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fill = entry.target;
+      const w = fill.dataset.width;
+      setTimeout(() => { fill.style.width = w + '%'; }, 200);
+      barObserver.unobserve(fill);
+    }
+  });
+}, { threshold: 0.5 });
+bars.forEach(b => barObserver.observe(b));
+
+// ─────────────────────────────────────────
+// FORM SUBMIT (no-op demo)
+// ─────────────────────────────────────────
+document.querySelector('.btn-submit').addEventListener('click', function() {
+  this.textContent = 'Message Sent ✓';
+  this.style.background = '#2a7a2a';
+  setTimeout(() => {
+    this.textContent = 'Send Message';
+    this.style.background = '';
+  }, 3000);
+});
+</script>
+
+</body>
+</html>
