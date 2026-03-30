@@ -1342,8 +1342,8 @@ function drawPortrait(pulse) {
 }
 
 function render() {
-  requestAnimationFrame(render);
-  t++;
+  //requestAnimationFrame(render);
+  //t++;
   const pulse = Math.sin(t * 0.006) * 0.5 + 0.5;
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0,0,W,H);
@@ -1357,23 +1357,23 @@ function render() {
   nb2.addColorStop(0,`rgba(50,12,0,${0.36+pulse*0.08})`);
   nb2.addColorStop(0.5,'rgba(16,4,0,0.16)'); nb2.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle=nb2; ctx.fillRect(0,0,REF_W,REF_H);
-  DUST.forEach(d=>{
-    d.x=(d.x+d.vx+REF_W)%REF_W; d.y=(d.y+d.vy+REF_H)%REF_H;
-    ctx.globalAlpha=d.opacity*(0.4+pulse*0.6);
-    ctx.fillStyle=`hsl(${d.hue},88%,57%)`;
-    ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
-  });
+  //DUST.forEach(d=>{
+    //d.x=(d.x+d.vx+REF_W)%REF_W; d.y=(d.y+d.vy+REF_H)%REF_H;
+    //ctx.globalAlpha=d.opacity*(0.4+pulse*0.6);
+    //ctx.fillStyle=`hsl(${d.hue},88%,57%)`;
+    //ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
+  //});
   ctx.globalAlpha=1;
   ARCS.forEach(a => drawArc(a, pulse));
-  particles.forEach(p => {
-    p.step(); const pos=p.pos();
-    const life=Math.min(p.life/40,1)*Math.min((p.maxLife-p.life)/28,1);
-    ctx.globalAlpha=life*p.bright*(0.48+pulse*0.38);
-    const hue=16+Math.random()*26;
-    ctx.fillStyle=`hsl(${hue},88%,${54+p.bright*24}%)`;
-    ctx.shadowBlur=p.size*5; ctx.shadowColor=`hsl(${hue},100%,65%)`;
-    ctx.beginPath(); ctx.arc(pos.x,pos.y,p.size,0,Math.PI*2); ctx.fill();
-  });
+  // particles.forEach(p => {
+  //   p.step(); const pos=p.pos();
+  //   const life=Math.min(p.life/40,1)*Math.min((p.maxLife-p.life)/28,1);
+  //   ctx.globalAlpha=life*p.bright*(0.48+pulse*0.38);
+  //   const hue=16+Math.random()*26;
+  //   ctx.fillStyle=`hsl(${hue},88%,${54+p.bright*24}%)`;
+  //   ctx.shadowBlur=p.size*5; ctx.shadowColor=`hsl(${hue},100%,65%)`;
+  //   ctx.beginPath(); ctx.arc(pos.x,pos.y,p.size,0,Math.PI*2); ctx.fill();
+  // });
   ctx.shadowBlur=0; ctx.globalAlpha=1;
   drawHotspots(pulse);
   drawPortrait(pulse);
